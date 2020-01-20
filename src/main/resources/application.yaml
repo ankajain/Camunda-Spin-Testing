@@ -1,0 +1,60 @@
+#logging:
+#  level:
+#    org:
+#      camunda:
+#        bpm:
+#          engine:
+# jobexecutor: DEBUG
+spring:
+  #  http:
+  #    multipart:
+  #      location: /data/upload_tmp
+  datasource:
+    url: jdbc:postgresql://localhost:5432/camunda
+    username: postgres
+    password: hasL0
+
+camunda:
+  bpm:
+    application:
+      resume-previous-versions: true
+    generic-properties:
+      properties:
+        historyCleanupStrategy: removalTimeBased
+        historyRemovalTimeStrategy: end
+        historyCleanupBatchWindowStartTime: "00:01"
+        historyCleanupBatchWindowEndTime: "23:59"
+        batchOperationHistoryTimeToLive: P0D
+    admin-user:
+      id: admin
+      password: admin
+      firstName: admin
+      lastName: admin
+      email: admin.admin@gmail.com
+    history-level: FULL
+    filter:
+      create: All tasks
+    #    job-execution:
+    #      deployment-aware: true
+    #  webapp:
+    #    index-redirect-enabled: true
+
+    #  management:
+    #    health.camunda.enabled: true
+    database:
+      type: postgres
+      jdbc-batch-processing: false
+    authorization:
+      enabled: true
+
+#job.executor:
+#  maxWaitInMillis: 5000
+#  waitTimeInMillis: 3000
+
+server:
+  port: 6063
+
+flow-service:
+  url: http://localhost:8080
+
+variablesToRemove: additionalParameter, description
